@@ -1,5 +1,6 @@
 package com.beastnighttv.jakminecraftmod;
 
+import com.beastnighttv.jakminecraftmod.block.ModBlocks;
 import com.beastnighttv.jakminecraftmod.item.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -18,6 +19,7 @@ public class JAKMinecraftMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
