@@ -23,3 +23,6 @@ run
 
 # Files from Forge MDK
 forge*changelog.txt
+
+# JAR file to copy
+copy_jar_file.py
