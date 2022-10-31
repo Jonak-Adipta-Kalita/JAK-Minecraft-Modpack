@@ -1,0 +1,30 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:bookshelf"
+        },
+        "title": {
+            "translate": "Librarian"
+        },
+        "description": {
+            "translate": "Craft a bookshelf"
+        }
+    },
+    "parent": "jak:story/root",
+    "criteria": {
+        "bookshelf": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "items": ["minecraft:bookshelf"],
+                        "count": {
+                            "min": 1,
+                            "max": 2624
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

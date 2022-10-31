@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "jakminecraftmod:block/deepslate_zircon_ore"
+        "all": "jak:block/deepslate_zircon_ore"
     }
 }

@@ -2,7 +2,7 @@ modLoader="javafml"
 loaderVersion="[41,)" 
 license="MIT License"
 [[mods]]
-modId="jakminecraftmod"
+modId="jak"
 version="${file.jarVersion}"
 displayName="JAK Minecraft Mod"
 logoFile="logo.png"
@@ -11,13 +11,13 @@ authors="JAK"
 description='''
 A Minecraft Mod made by JAK
 '''
-[[dependencies.jakminecraftmod]]
+[[dependencies.jak]]
     modId="forge"
     mandatory=true
     versionRange="[41,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.jakminecraftmod]]
+[[dependencies.jak]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19,1.20)"

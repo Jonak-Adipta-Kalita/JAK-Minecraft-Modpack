@@ -1,10 +1,10 @@
-package com.beastnighttv.jakminecraftmod.block;
+package com.beastnighttv.jak.block;
 
 import java.util.function.Supplier;
 
-import com.beastnighttv.jakminecraftmod.JAKMinecraftMod;
-import com.beastnighttv.jakminecraftmod.item.ModCreativeModeTab;
-import com.beastnighttv.jakminecraftmod.item.ModItems;
+import com.beastnighttv.jak.JAKMinecraftMod;
+import com.beastnighttv.jak.item.ModCreativeModeTab;
+import com.beastnighttv.jak.item.ModItems;
 
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;

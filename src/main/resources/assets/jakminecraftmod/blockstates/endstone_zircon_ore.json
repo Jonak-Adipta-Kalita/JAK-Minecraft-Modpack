@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "jakminecraftmod:block/endstone_zircon_ore"
+            "model": "jak:block/endstone_zircon_ore"
         }
     }
 }

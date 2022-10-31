@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "jakminecraftmod:item/raw_zircon"
+        "layer0": "jak:item/raw_zircon"
     }
 }

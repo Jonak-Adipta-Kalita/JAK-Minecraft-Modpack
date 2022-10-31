@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "jakminecraftmod:block/netherrack_zircon_ore"
+        "all": "jak:block/netherrack_zircon_ore"
     }
 }

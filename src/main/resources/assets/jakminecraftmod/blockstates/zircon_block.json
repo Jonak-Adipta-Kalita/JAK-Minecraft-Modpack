@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "jakminecraftmod:block/zircon_block"
+            "model": "jak:block/zircon_block"
         }
     }
 }

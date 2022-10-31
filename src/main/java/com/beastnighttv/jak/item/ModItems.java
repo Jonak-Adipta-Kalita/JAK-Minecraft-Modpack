@@ -1,6 +1,6 @@
-package com.beastnighttv.jakminecraftmod.item;
+package com.beastnighttv.jak.item;
 
-import com.beastnighttv.jakminecraftmod.JAKMinecraftMod;
+import com.beastnighttv.jak.JAKMinecraftMod;
 
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;

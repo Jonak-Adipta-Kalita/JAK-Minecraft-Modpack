@@ -1,12 +1,12 @@
 {
-    "item.jakminecraftmod.zircon": "Zircon",
-    "item.jakminecraftmod.raw_zircon": "Raw Zircon",
+    "item.jak.zircon": "Zircon",
+    "item.jak.raw_zircon": "Raw Zircon",
 
-    "block.jakminecraftmod.zircon_block": "Block of Zircon",
-    "block.jakminecraftmod.zircon_ore": "Zircon Ore",
-    "block.jakminecraftmod.deepslate_zircon_ore": "Deepslate Zircon Ore",
-    "block.jakminecraftmod.endstone_zircon_ore": "Endstone Zircon Ore",
-    "block.jakminecraftmod.netherrack_zircon_ore": "Netherrack Zircon Ore",
+    "block.jak.zircon_block": "Block of Zircon",
+    "block.jak.zircon_ore": "Zircon Ore",
+    "block.jak.deepslate_zircon_ore": "Deepslate Zircon Ore",
+    "block.jak.endstone_zircon_ore": "Endstone Zircon Ore",
+    "block.jak.netherrack_zircon_ore": "Netherrack Zircon Ore",
 
     "itemGroup.jak_tab": "JAK Tab"
 }

@@ -1,4 +1,4 @@
-package com.beastnighttv.jakminecraftmod.item;
+package com.beastnighttv.jak.item;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;

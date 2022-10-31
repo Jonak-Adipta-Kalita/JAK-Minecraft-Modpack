@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "jakminecraftmod:block/endstone_zircon_ore"
+        "all": "jak:block/endstone_zircon_ore"
     }
 }

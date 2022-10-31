@@ -1,7 +1,7 @@
-package com.beastnighttv.jakminecraftmod;
+package com.beastnighttv.jak;
 
-import com.beastnighttv.jakminecraftmod.block.ModBlocks;
-import com.beastnighttv.jakminecraftmod.item.ModItems;
+import com.beastnighttv.jak.block.ModBlocks;
+import com.beastnighttv.jak.item.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(JAKMinecraftMod.MODID)
 
 public class JAKMinecraftMod {
-    public static final String MODID = "jakminecraftmod";
+    public static final String MODID = "jak";
 
     public JAKMinecraftMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
