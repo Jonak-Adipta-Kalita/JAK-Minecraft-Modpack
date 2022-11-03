@@ -3,6 +3,7 @@ package com.beastnighttv.jak.block;
 import java.util.function.Supplier;
 
 import com.beastnighttv.jak.JAKMinecraftMod;
+import com.beastnighttv.jak.block.custom.JumpyBlock;
 import com.beastnighttv.jak.item.ModCreativeModeTab;
 import com.beastnighttv.jak.item.ModItems;
 
@@ -34,17 +35,22 @@ public class ModBlocks {
     );
     public static final RegistryObject<Block> DEEPSLATE_ZIRCON_ORE = registerBlock(
         "deepslate_zircon_ore",
-        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(6f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(7f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
         ModCreativeModeTab.JAK_TAB
     );
     public static final RegistryObject<Block> NETHERRACK_ZIRCON_ORE = registerBlock(
         "netherrack_zircon_ore",
-        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(6f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(7f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
         ModCreativeModeTab.JAK_TAB
     );
     public static final RegistryObject<Block> ENDSTONE_ZIRCON_ORE = registerBlock(
         "endstone_zircon_ore",
-        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(6f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+        () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(7f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+        ModCreativeModeTab.JAK_TAB
+    );
+    public static final RegistryObject<Block> JUMPY_BLOCK = registerBlock(
+        "jumpy_block",
+        () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(2f)),
         ModCreativeModeTab.JAK_TAB
     );
 
