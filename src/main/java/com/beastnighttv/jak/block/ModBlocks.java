@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.beastnighttv.jak.JAKMinecraftMod;
 import com.beastnighttv.jak.block.custom.JumpyBlock;
+import com.beastnighttv.jak.block.custom.ZirconLampBlock;
 import com.beastnighttv.jak.item.ModCreativeModeTab;
 import com.beastnighttv.jak.item.ModItems;
 
@@ -46,6 +47,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> ENDSTONE_ZIRCON_ORE = registerBlock(
         "endstone_zircon_ore",
         () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE).strength(7f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)),
+        ModCreativeModeTab.JAK_TAB
+    );
+    public static final RegistryObject<Block> ZIRCON_LAMP = registerBlock(
+        "zircon_lamp",
+        () -> new ZirconLampBlock(BlockBehaviour.Properties.of(Material.STONE).strength(2f).lightLevel(state -> state.getValue(ZirconLampBlock.LIT) ? 15 : 0)),
         ModCreativeModeTab.JAK_TAB
     );
     public static final RegistryObject<Block> JUMPY_BLOCK = registerBlock(
