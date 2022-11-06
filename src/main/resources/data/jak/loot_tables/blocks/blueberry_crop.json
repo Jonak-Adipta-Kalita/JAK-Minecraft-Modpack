@@ -13,17 +13,17 @@
                             "conditions": [
                                 {
                                     "condition": "minecraft:block_state_property",
-                                    "block": "tutorialmod:blueberry_crop",
+                                    "block": "jak:blueberry_crop",
                                     "properties": {
                                         "age": "6"
                                     }
                                 }
                             ],
-                            "name": "tutorialmod:blueberry"
+                            "name": "jak:blueberry"
                         },
                         {
                             "type": "minecraft:item",
-                            "name": "tutorialmod:blueberry_seeds"
+                            "name": "jak:blueberry_seeds"
                         }
                     ]
                 }
@@ -46,13 +46,13 @@
                             }
                         }
                     ],
-                    "name": "tutorialmod:blueberry_seeds"
+                    "name": "jak:blueberry_seeds"
                 }
             ],
             "conditions": [
                 {
                     "condition": "minecraft:block_state_property",
-                    "block": "tutorialmod:blueberry_crop",
+                    "block": "jak:blueberry_crop",
                     "properties": {
                         "age": "6"
                     }
