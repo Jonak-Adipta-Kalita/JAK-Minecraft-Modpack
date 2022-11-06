@@ -1,5 +1,6 @@
-package com.beastnighttv.jak.item;
+package com.beastnighttv.jak;
 
+import com.beastnighttv.jak.item.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 

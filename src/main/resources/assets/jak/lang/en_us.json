@@ -2,6 +2,8 @@
     "item.jak.zircon": "Zircon Ingot",
     "item.jak.raw_zircon": "Raw Zircon",
     "item.jak.eight_ball": "Eight Ball",
+    "item.jak.blueberry": "Blueberry",
+    "item.jak.blueberry_seeds": "Blueberry Seeds",
 
     "block.jak.zircon_block": "Block of Zircon",
     "block.jak.zircon_ore": "Zircon Ore",
@@ -10,6 +12,7 @@
     "block.jak.netherrack_zircon_ore": "Netherrack Zircon Ore",
     "block.jak.jumpy_block": "Jumpy Block",
     "block.jak.zircon_lamp": "Zircon Lamp",
+    "block.jak.blueberry_crop": "Blueberry Crop",
 
     "itemGroup.jak_tab": "JAK Tab"
 }

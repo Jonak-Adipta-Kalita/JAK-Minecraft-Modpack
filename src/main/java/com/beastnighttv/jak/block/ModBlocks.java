@@ -3,9 +3,10 @@ package com.beastnighttv.jak.block;
 import java.util.function.Supplier;
 
 import com.beastnighttv.jak.JAKMinecraftMod;
+import com.beastnighttv.jak.ModCreativeModeTab;
+import com.beastnighttv.jak.block.custom.BlueBerryCropBlock;
 import com.beastnighttv.jak.block.custom.JumpyBlock;
 import com.beastnighttv.jak.block.custom.ZirconLampBlock;
-import com.beastnighttv.jak.item.ModCreativeModeTab;
 import com.beastnighttv.jak.item.ModItems;
 
 import net.minecraft.util.valueproviders.UniformInt;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -58,6 +60,10 @@ public class ModBlocks {
         "jumpy_block",
         () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(2f)),
         ModCreativeModeTab.JAK_TAB
+    );
+    public static final RegistryObject<Block> BLUEBERYY_CROP = BLOCKS.register(
+        "blueberry_crop",
+        () -> new BlueBerryCropBlock(BlockBehaviour.Properties.copy(Blocks.WHEAT))
     );
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
