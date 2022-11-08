@@ -4,6 +4,8 @@ import com.beastnighttv.jak.block.ModBlocks;
 import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.painting.ModPaintings;
 import com.beastnighttv.jak.villager.ModVillagers;
+import com.beastnighttv.jak.world.feature.ModConfiguredFeatures;
+import com.beastnighttv.jak.world.feature.ModPlacedFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +26,8 @@ public class JAKMinecraftMod {
         ModBlocks.register(modEventBus);
         ModVillagers.register(modEventBus);
         ModPaintings.register(modEventBus);
+        ModConfiguredFeatures.register(modEventBus);
+        ModPlacedFeatures.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
