@@ -59,7 +59,9 @@ public class EightBallItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
-            player.sendSystemMessage(Component.literal(RESPONSES[RandomSource.createNewThreadLocalInstance().nextInt(RESPONSES.length)]));
+            player.sendSystemMessage(
+                Component.literal(RESPONSES[RandomSource.createNewThreadLocalInstance().nextInt(RESPONSES.length)])
+            );
             player.getCooldowns().addCooldown(this, 20);
         }
 

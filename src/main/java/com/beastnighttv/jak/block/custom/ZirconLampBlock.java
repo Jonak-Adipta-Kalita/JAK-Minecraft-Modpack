@@ -29,7 +29,9 @@ public class ZirconLampBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult blockHitResult) {
+    public InteractionResult use(
+        BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult blockHitResult
+    ) {
         if (!level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
             level.setBlock(blockPos, blockState.cycle(LIT), 3);
         }

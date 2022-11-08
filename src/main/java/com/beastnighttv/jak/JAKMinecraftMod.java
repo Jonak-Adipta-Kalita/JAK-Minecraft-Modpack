@@ -2,6 +2,7 @@ package com.beastnighttv.jak;
 
 import com.beastnighttv.jak.block.ModBlocks;
 import com.beastnighttv.jak.item.ModItems;
+import com.beastnighttv.jak.painting.ModPaintings;
 import com.beastnighttv.jak.villager.ModVillagers;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,6 +23,7 @@ public class JAKMinecraftMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModVillagers.register(modEventBus);
+        ModPaintings.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
