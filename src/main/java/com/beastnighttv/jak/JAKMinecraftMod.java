@@ -29,9 +29,7 @@ public class JAKMinecraftMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            ModVillagers.registerPOIs();
-        });
+        event.enqueueWork(ModVillagers::registerPOIs);
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
