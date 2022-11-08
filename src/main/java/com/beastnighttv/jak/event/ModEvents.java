@@ -1,4 +1,4 @@
-package com.beastnighttv.event;
+package com.beastnighttv.jak.event;
 
 import java.util.List;
 import com.beastnighttv.jak.JAKMinecraftMod;
