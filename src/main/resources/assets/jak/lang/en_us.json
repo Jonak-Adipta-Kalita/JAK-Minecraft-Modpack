@@ -16,5 +16,8 @@
 
     "itemGroup.jak_tab": "JAK Tab",
 
-    "entity.minecraft.villager.jak.jump_master": "Jump Master"
+    "entity.minecraft.villager.jak.jump_master": "Jump Master",
+
+    "key.category.jak.jak": "JAK Mod",
+    "key.jak.drink_water": "Drink Water"
 }
