@@ -14,5 +14,7 @@
     "block.jak.zircon_lamp": "Zircon Lamp",
     "block.jak.blueberry_crop": "Blueberry Crop",
 
-    "itemGroup.jak_tab": "JAK Tab"
+    "itemGroup.jak_tab": "JAK Tab",
+
+    "entity.minecraft.villager.jak.jump_master": "Jump Master"
 }
