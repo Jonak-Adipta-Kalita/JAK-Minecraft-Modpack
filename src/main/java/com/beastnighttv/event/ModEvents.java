@@ -34,6 +34,7 @@ public class ModEvents {
         if (event.getType() == VillagerProfession.FARMER) {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
             ItemStack blueBerryForEmeraldStack = new ItemStack(Items.EMERALD, 1);
+            ItemStack blueBerryStack = new ItemStack(ModItems.BLUEBERRY.get(), 15);
 
             trades.get(1).add((trader, rand) -> new MerchantOffer(
                 new ItemStack(ModItems.BLUEBERRY.get(), 20),
@@ -42,13 +43,7 @@ public class ModEvents {
                 8,
                 0.2f
             ));
-        }
-
-        if (event.getType() == ModVillagers.JUMP_MASTER.get()) {
-            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
-            ItemStack blueBerryStack = new ItemStack(ModItems.BLUEBERRY.get(), 15);
-            ItemStack zirconIngotStack = new ItemStack(ModItems.ZIRCON.get(), 10);
-
+            
             trades.get(1).add((trader, rand) -> new MerchantOffer(
                 new ItemStack(Items.EMERALD, 5),
                 blueBerryStack,
@@ -56,8 +51,13 @@ public class ModEvents {
                 8,
                 0.2f
             ));
+        }
 
-            trades.get(2).add((trader, rand) -> new MerchantOffer(
+        if (event.getType() == ModVillagers.JUMP_MASTER.get()) {
+            Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
+            ItemStack zirconIngotStack = new ItemStack(ModItems.ZIRCON.get(), 10);
+
+            trades.get(1).add((trader, rand) -> new MerchantOffer(
                 new ItemStack(Items.EMERALD, 5),
                 zirconIngotStack,
                 12,
