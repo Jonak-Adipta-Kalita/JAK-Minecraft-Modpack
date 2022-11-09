@@ -2,6 +2,7 @@ package com.beastnighttv.jak;
 
 import com.beastnighttv.jak.block.ModBlocks;
 import com.beastnighttv.jak.item.ModItems;
+import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.painting.ModPaintings;
 import com.beastnighttv.jak.villager.ModVillagers;
 import com.beastnighttv.jak.world.feature.ModConfiguredFeatures;
@@ -35,7 +36,10 @@ public class JAKMinecraftMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(ModVillagers::registerPOIs);
+        event.enqueueWork(() -> {
+            ModMessages.register();
+            ModVillagers.registerPOIs();
+        });
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

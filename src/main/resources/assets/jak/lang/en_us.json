@@ -19,5 +19,8 @@
     "entity.minecraft.villager.jak.jump_master": "Jump Master",
 
     "key.category.jak.jak": "JAK Mod",
-    "key.jak.drink_water": "Drink Water"
+    "key.jak.drink_water": "Drink Water",
+
+    "message.jak.drink_water": "Drinking Water!!",
+    "message.jak.no_water": "No Water nearby!!"
 }

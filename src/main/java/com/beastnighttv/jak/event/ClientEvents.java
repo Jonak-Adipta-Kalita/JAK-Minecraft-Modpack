@@ -1,6 +1,8 @@
 package com.beastnighttv.jak.event;
 
 import com.beastnighttv.jak.JAKMinecraftMod;
+import com.beastnighttv.jak.networking.ModMessages;
+import com.beastnighttv.jak.networking.packet.DrinkWaterC2SPacket;
 import com.beastnighttv.jak.util.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
@@ -14,7 +16,7 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event) {
             if (KeyBinding.DRINKING_KEY.consumeClick()) {
-                // Drink Water
+                ModMessages.sendToServer(new DrinkWaterC2SPacket());
             }
         }
     }
