@@ -17,7 +17,7 @@ public class PlayerThirst {
     }
 
     public void subThirst(int sub) {
-        this.thirst = Math.max(thirst + sub, MIN_THIRST);
+        this.thirst = Math.max(thirst - sub, MIN_THIRST);
     }
 
     public void copyForm(PlayerThirst source) {

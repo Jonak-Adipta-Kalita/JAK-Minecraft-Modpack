@@ -1,6 +1,7 @@
 package com.beastnighttv.jak.networking.packet;
 
 import java.util.function.Supplier;
+import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.thirst.PlayerThirstProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
@@ -47,9 +48,13 @@ public class DrinkWaterC2SPacket {
                 );
                 player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
                     thirst.addThirst(1);
+                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), player);
                 });
             } else {
                 player.sendSystemMessage(Component.translatable(MESSAGE_NO_WATER).withStyle(ChatFormatting.RED));
+                player.getCapability(PlayerThirstProvider.PLAYER_THIRST).ifPresent(thirst -> {
+                    ModMessages.sendToPlayer(new ThirstDataSyncS2CPacket(thirst.getThirst()), player);
+                });
             }
         });
 

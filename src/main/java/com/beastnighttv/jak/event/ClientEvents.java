@@ -1,11 +1,13 @@
 package com.beastnighttv.jak.event;
 
 import com.beastnighttv.jak.JAKMinecraftMod;
+import com.beastnighttv.jak.client.ThirstHudOverlay;
 import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.networking.packet.DrinkWaterC2SPacket;
 import com.beastnighttv.jak.util.KeyBinding;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +28,11 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.DRINKING_KEY);
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event) {
+            event.registerAboveAll("thirst", ThirstHudOverlay.HUD_THIRST);
         }
     }
 }
