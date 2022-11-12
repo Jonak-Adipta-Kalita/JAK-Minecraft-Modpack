@@ -7,6 +7,10 @@ import com.beastnighttv.jak.painting.ModPaintings;
 import com.beastnighttv.jak.villager.ModVillagers;
 import com.beastnighttv.jak.world.feature.ModConfiguredFeatures;
 import com.beastnighttv.jak.world.feature.ModPlacedFeatures;
+import com.beastnighttv.jak.fluid.ModFluidTypes;
+import com.beastnighttv.jak.fluid.ModFluids;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,6 +33,8 @@ public class JAKMinecraftMod {
         ModPaintings.register(modEventBus);
         ModConfiguredFeatures.register(modEventBus);
         ModPlacedFeatures.register(modEventBus);
+        ModFluids.register(modEventBus);
+        ModFluidTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -45,6 +51,9 @@ public class JAKMinecraftMod {
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {}
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SOAP_WATER.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SOAP_WATER.get(), RenderType.translucent());
+        }
     }
 }
