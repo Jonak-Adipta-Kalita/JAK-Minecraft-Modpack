@@ -6,7 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.FogRenderer.FogMode;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
@@ -94,10 +94,10 @@ public class BaseFluidType extends FluidType {
             @Override
             public void modifyFogRender(
 				Camera camera,
-				FogRenderer.FogMode mode,
+				FogMode mode,
 				float renderDistance,
-				float partialTick,float
-				nearDistance,
+				float partialTick,
+				float nearDistance,
 				float farDistance,
 				FogShape shape
 			) {
