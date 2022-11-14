@@ -14,7 +14,10 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModFluidTypes {
     public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
     public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
-    public static final ResourceLocation SOAP_OVERLAY_RL = new ResourceLocation(JAKMinecraftMod.MODID, "misc/in_soap_water");
+    public static final ResourceLocation SOAP_OVERLAY_RL = new ResourceLocation(
+        JAKMinecraftMod.MODID,
+        "textures/fluid/in_soap_water.png"
+    );
 
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(
         ForgeRegistries.Keys.FLUID_TYPES,
@@ -28,10 +31,11 @@ public class ModFluidTypes {
             .lightLevel(2)
             .density(15)
             .viscosity(5)
-            .sound(SoundAction.get("drink"),
-        SoundEvents.HONEY_DRINK));
-
-
+            .sound(
+                SoundAction.get("drink"),
+                SoundEvents.HONEY_DRINK
+            )
+    );
 
     private static RegistryObject<FluidType> register(String name, FluidType.Properties properties) {
         return FLUID_TYPES.register(
