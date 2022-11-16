@@ -1,7 +1,27 @@
 {
-    "parent": "item/generated",
+	"parent": "item/generated",
     "textures": {
         "layer0": "jak:item/zircon_sword"
-    }
+    },
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [3, -91, 47],
+			"translation": [0.25, 4.5, 1.5],
+			"scale": [0.98, 0.98, 1.21]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [-14, -90, -57],
+			"translation": [0, 4.75, 2.25],
+			"scale": [0.98, 0.98, 1.21]
+		},
+		"firstperson_righthand": {
+			"rotation": [-9, 78, 45.5],
+			"translation": [0.75, 3.75, 2]
+		},
+		"firstperson_lefthand": {
+			"rotation": [5, -93, -28],
+			"translation": [0.75, 4.25, 0.5],
+			"scale": [0.98, 0.98, 1.21]
+		}
+	}
 }
-

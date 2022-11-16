@@ -46,7 +46,7 @@ public class ModItems {
     );
     public static final RegistryObject<SwordItem> ZIRCON_SWORD = ITEMS.register(
         "zircon_sword",
-        () -> new SwordItem(Tiers.DIAMOND, 10, 5f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+        () -> new SwordItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
 
     public static void register(IEventBus eventBus) {
