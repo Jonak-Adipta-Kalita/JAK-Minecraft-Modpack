@@ -7,7 +7,9 @@ import com.beastnighttv.jak.fluid.ModFluids;
 import com.beastnighttv.jak.item.custom.EightBallItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,6 +43,10 @@ public class ModItems {
     public static final RegistryObject<BucketItem> SOAP_WATER_BUCKET = ITEMS.register(
         "soap_water_bucket",
         () -> new BucketItem(ModFluids.SOURCE_SOAP_WATER, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).craftRemainder(Items.BUCKET).stacksTo(1))
+    );
+    public static final RegistryObject<SwordItem> ZIRCON_SWORD = ITEMS.register(
+        "zircon_sword",
+        () -> new SwordItem(Tiers.DIAMOND, 10, 5f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
 
     public static void register(IEventBus eventBus) {
