@@ -6,12 +6,7 @@ import com.beastnighttv.jak.block.ModBlocks;
 import com.beastnighttv.jak.fluid.ModFluids;
 import com.beastnighttv.jak.item.custom.EightBallItem;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
-import net.minecraft.world.item.ItemNameBlockItem;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -47,6 +42,10 @@ public class ModItems {
     public static final RegistryObject<SwordItem> ZIRCON_SWORD = ITEMS.register(
         "zircon_sword",
         () -> new SwordItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+    );
+    public static final RegistryObject<PickaxeItem> ZIRCON_PICKAXE = ITEMS.register(
+        "zircon_pickaxe",
+        () -> new PickaxeItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
 
     public static void register(IEventBus eventBus) {
