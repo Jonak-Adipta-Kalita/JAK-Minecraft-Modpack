@@ -10,6 +10,10 @@
     "item.jak.zircon_axe": "Zircon Axe",
     "item.jak.zircon_shovel": "Zircon Shovel",
     "item.jak.zircon_hoe": "Zircon Hoe",
+    "item.jak.zircon_helmet": "Zircon Helmet",
+    "item.jak.zircon_chestplate": "Zircon Chestplate",
+    "item.jak.zircon_leggings": "Zircon Leggings",
+    "item.jak.zircon_boots": "Zircon Boots",
 
     "block.jak.zircon_block": "Block of Zircon",
     "block.jak.zircon_ore": "Zircon Ore",
