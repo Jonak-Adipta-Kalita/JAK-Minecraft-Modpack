@@ -47,6 +47,10 @@ public class ModItems {
         "zircon_pickaxe",
         () -> new PickaxeItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
+	public static final RegistryObject<AxeItem> ZIRCON_AXE = ITEMS.register(
+        "zircon_axe",
+        () -> new AxeItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+    );
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
