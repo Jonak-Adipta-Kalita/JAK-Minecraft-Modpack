@@ -55,6 +55,10 @@ public class ModItems {
         "zircon_shovel",
         () -> new ShovelItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
+	public static final RegistryObject<HoeItem> ZIRCON_HOE = ITEMS.register(
+        "zircon_hoe",
+        () -> new HoeItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+    );
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
