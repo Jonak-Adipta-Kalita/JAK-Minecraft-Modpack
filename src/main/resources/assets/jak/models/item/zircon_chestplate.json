@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "minecraft:item/zircon_chestplate"
+		"layer0": "jak:item/zircon_chestplate"
 	}
 }
