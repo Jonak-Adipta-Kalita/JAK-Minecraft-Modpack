@@ -5,7 +5,9 @@ import com.beastnighttv.jak.ModCreativeModeTab;
 import com.beastnighttv.jak.block.ModBlocks;
 import com.beastnighttv.jak.fluid.ModFluids;
 import com.beastnighttv.jak.item.custom.EightBallItem;
+import com.beastnighttv.jak.tiers.ModZirconArmorMaterial;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -14,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, JAKMinecraftMod.MODID);
+    public static final ModZirconArmorMaterial ZIRCON_ARMOR_MATERIAL = new ModZirconArmorMaterial();
 
     public static final RegistryObject<Item> ZIRCON = ITEMS.register(
         "zircon",
@@ -59,6 +62,22 @@ public class ModItems {
         "zircon_hoe",
         () -> new HoeItem(Tiers.DIAMOND, 10, 1.6f, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
     );
+	public static final RegistryObject<ArmorItem> ZIRCON_HELMET = ITEMS.register(
+		"zircon_helmet",
+		() -> new ArmorItem(ZIRCON_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+	);
+	public static final RegistryObject<ArmorItem> ZIRCON_CHESTPLATE = ITEMS.register(
+		"zircon_chestplate",
+		() -> new ArmorItem(ZIRCON_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+	);
+	public static final RegistryObject<ArmorItem> ZIRCON_LEGGINGS = ITEMS.register(
+		"zircon_leggings",
+		() -> new ArmorItem(ZIRCON_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+	);
+	public static final RegistryObject<ArmorItem> ZIRCON_BOOTS = ITEMS.register(
+		"zircon_boots",
+		() -> new ArmorItem(ZIRCON_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeModeTab.JAK_TAB).stacksTo(1))
+	);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
