@@ -7,6 +7,7 @@ import com.beastnighttv.jak.ModCreativeModeTab;
 import com.beastnighttv.jak.block.custom.BlueBerryCropBlock;
 import com.beastnighttv.jak.block.custom.JumpyBlock;
 import com.beastnighttv.jak.block.custom.ZirconLampBlock;
+import com.beastnighttv.jak.block.custom.GemInfusingStationBlock;
 import com.beastnighttv.jak.fluid.ModFluids;
 import com.beastnighttv.jak.item.ModItems;
 
@@ -60,7 +61,7 @@ public class ModBlocks {
     );
     public static final RegistryObject<JumpyBlock> JUMPY_BLOCK = registerBlock(
         "jumpy_block",
-        () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.CLAY).strength(2f)),
+        () -> new JumpyBlock(BlockBehaviour.Properties.of(Material.STONE).strength(2f)),
         ModCreativeModeTab.JAK_TAB
     );
     public static final RegistryObject<BlueBerryCropBlock> BLUEBERYY_CROP = BLOCKS.register(
@@ -70,6 +71,11 @@ public class ModBlocks {
     public static final RegistryObject<LiquidBlock> SOAP_WATER_BLOCK = BLOCKS.register(
         "soap_water_block",
         () -> new LiquidBlock(ModFluids.SOURCE_SOAP_WATER, BlockBehaviour.Properties.copy(Blocks.WATER))
+    );
+    public static final RegistryObject<GemInfusingStationBlock> GEM_INFUSING_STATION = registerBlock(
+        "gem_infusing_station",
+        () -> new GemInfusingStationBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2f).requiresCorrectToolForDrops().noOcclusion()),
+        ModCreativeModeTab.JAK_TAB
     );
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
