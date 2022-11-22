@@ -73,54 +73,46 @@ public class GemInfusingStationBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean pIsMoving) {
-        if (blockState.getBlock() != blockState2.getBlock()) {
-            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
             if (blockEntity instanceof GemInfusingStationBlockEntity) {
                 ((GemInfusingStationBlockEntity) blockEntity).drops();
             }
         }
-
-        super.onRemove(blockState, level, blockPos, blockState2, pIsMoving);
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     @Override
     public InteractionResult use(
-        BlockState blockState,
-        Level level,
-        BlockPos blockPos,
-        Player player,
-        InteractionHand interactionHand,
-        BlockHitResult blockHitResult
+        BlockState pState,
+        Level pLevel,
+        BlockPos pPos,
+        Player pPlayer,
+        InteractionHand pHand,
+        BlockHitResult pHit
     ) {
-        if (!level.isClientSide()) {
-            BlockEntity entity = level.getBlockEntity(blockPos);
-            if (entity instanceof GemInfusingStationBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) player), (GemInfusingStationBlockEntity) entity, blockPos);
+        if (!pLevel.isClientSide()) {
+            BlockEntity entity = pLevel.getBlockEntity(pPos);
+            if(entity instanceof GemInfusingStationBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (GemInfusingStationBlockEntity)entity, pPos);
             } else {
-                throw new IllegalStateException("Our container provider is illegal.");
+                throw new IllegalStateException("Our Container provider is missing!");
             }
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
-    @Override
     @Nullable
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new GemInfusingStationBlockEntity(blockPos, blockState);
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new GemInfusingStationBlockEntity(pos, state);
     }
 
-    @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(
-        Level level,
-        BlockState blockState,
-        BlockEntityType<T> blockEntityType) {
-            return createTickerHelper(
-                blockEntityType,
-                ModBlockEntities.GEM_INFUSING_STATION.get(),
-                GemInfusingStationBlockEntity::tick
-            );
-        }
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, ModBlockEntities.GEM_INFUSING_STATION.get(), GemInfusingStationBlockEntity::tick);
+    }
 }

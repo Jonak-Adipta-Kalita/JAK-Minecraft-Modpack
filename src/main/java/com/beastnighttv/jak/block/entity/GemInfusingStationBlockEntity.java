@@ -30,18 +30,17 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
-        };
+        }
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    
-    protected final ContainerData data;
 
+    protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
 
-    public GemInfusingStationBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.GEM_INFUSING_STATION.get(), blockPos, blockState);
+    public GemInfusingStationBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntities.GEM_INFUSING_STATION.get(), pos, state);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
@@ -68,24 +67,22 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     }
 
     @Override
+    public Component getDisplayName() {
+        return Component.translatable("block.jak.gem_infusing_station");
+    }
+
     @Nullable
+    @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new GemInfusingStationMenu(id, inventory, this, this.data);
     }
 
     @Override
-    public Component getDisplayName() {
-        return Component.translatable("block.jak.gem_infusing_station");
-    }
-
-    @Override
-    public <T> @NotNull LazyOptional<T> getCapability(
-        @NotNull Capability<T> cap,
-        @org.jetbrains.annotations.Nullable Direction side
-    ) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return lazyItemHandler.cast();
         }
+
         return super.getCapability(cap, side);
     }
 
@@ -95,7 +92,6 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
     }
 
-    
     @Override
     public void invalidateCaps() {
         super.invalidateCaps();
@@ -113,7 +109,6 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         progress = nbt.getInt("gem_infusing_station.progress");
     }
@@ -127,24 +122,24 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, GemInfusingStationBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos pos, BlockState state, GemInfusingStationBlockEntity pEntity) {
         if (level.isClientSide()) {
             return;
         }
 
         if (hasRecipe(pEntity)) {
             pEntity.progress++;
-            setChanged(level, blockPos, blockState);
+            setChanged(level, pos, state);
 
             if (pEntity.progress >= pEntity.maxProgress) {
                 craftItem(pEntity);
-            } else {
-                pEntity.resetProgress();
-                setChanged(level, blockPos, blockState);
             }
+        } else {
+            pEntity.resetProgress();
+            setChanged(level, pos, state);
         }
     }
-    
+
     private void resetProgress() {
         this.progress = 0;
     }
