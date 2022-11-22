@@ -1,14 +1,18 @@
 package com.beastnighttv.jak;
 
 import com.beastnighttv.jak.block.ModBlocks;
+import com.beastnighttv.jak.block.entity.ModBlockEntities;
 import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.painting.ModPaintings;
+import com.beastnighttv.jak.screen.GemInfusingStationScreen;
+import com.beastnighttv.jak.screen.ModMenuTypes;
 import com.beastnighttv.jak.villager.ModVillagers;
 import com.beastnighttv.jak.world.feature.ModConfiguredFeatures;
 import com.beastnighttv.jak.world.feature.ModPlacedFeatures;
 import com.beastnighttv.jak.fluid.ModFluidTypes;
 import com.beastnighttv.jak.fluid.ModFluids;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.common.MinecraftForge;
@@ -35,6 +39,8 @@ public class JAKMinecraftMod {
         ModPlacedFeatures.register(modEventBus);
         ModFluids.register(modEventBus);
         ModFluidTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -54,6 +60,8 @@ public class JAKMinecraftMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             ItemBlockRenderTypes.setRenderLayer(ModFluids.SOURCE_SOAP_WATER.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModFluids.FLOWING_SOAP_WATER.get(), RenderType.translucent());
+
+            MenuScreens.register(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), GemInfusingStationScreen::new);
         }
     }
 }

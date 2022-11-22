@@ -2,10 +2,8 @@ package com.beastnighttv.jak.tiers;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import com.beastnighttv.jak.JAKMinecraftMod;
-import com.beastnighttv.jak.item.ModItems;
 import net.minecraft.sounds.SoundEvent;
 import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
