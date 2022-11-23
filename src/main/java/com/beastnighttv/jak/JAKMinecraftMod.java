@@ -5,6 +5,7 @@ import com.beastnighttv.jak.block.entity.ModBlockEntities;
 import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.painting.ModPaintings;
+import com.beastnighttv.jak.recipe.ModRecipes;
 import com.beastnighttv.jak.screen.GemInfusingStationScreen;
 import com.beastnighttv.jak.screen.ModMenuTypes;
 import com.beastnighttv.jak.villager.ModVillagers;
@@ -41,6 +42,7 @@ public class JAKMinecraftMod {
         ModFluidTypes.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 

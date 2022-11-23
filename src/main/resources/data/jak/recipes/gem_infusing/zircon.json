@@ -1,0 +1,11 @@
+{
+    "type": "jak:gem_infusing",
+    "ingredients": [
+        {
+            "item": "jak:raw_zircon"
+        }
+    ],
+    "result": {
+        "item": "jak:zircon"
+    }
+}

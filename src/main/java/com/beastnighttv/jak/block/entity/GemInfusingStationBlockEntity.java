@@ -1,8 +1,10 @@
 package com.beastnighttv.jak.block.entity;
 
+import java.util.Optional;
 import javax.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 import com.beastnighttv.jak.item.ModItems;
+import com.beastnighttv.jak.recipe.GemInfusingStationRecipe;
 import com.beastnighttv.jak.screen.GemInfusingStationMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -145,30 +147,50 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     }
 
     private static void craftItem(GemInfusingStationBlockEntity pEntity) {
-        if (hasRecipe(pEntity)) {
+        Level level = pEntity.level;
+        SimpleContainer inventory = new SimpleContainer(pEntity.itemHandler.getSlots());
+
+        for (int i = 0; i < pEntity.itemHandler.getSlots(); i++) {
+            inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
+        }
+
+        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager().getRecipeFor(
+            GemInfusingStationRecipe.Type.INSTANCE,
+            inventory,
+            level
+        );
+
+        if(hasRecipe(pEntity)) {
             pEntity.itemHandler.extractItem(1, 1, false);
             pEntity.itemHandler.setStackInSlot(
                 2,
                 new ItemStack(
-                    ModItems.ZIRCON.get(),
+                    recipe.get().getResultItem().getItem(),
                     pEntity.itemHandler.getStackInSlot(2).getCount() + 1
                 )
             );
+
             pEntity.resetProgress();
         }
     }
 
     private static boolean hasRecipe(GemInfusingStationBlockEntity entity) {
+        Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
+        
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        boolean hasRawGemInFirstSlot = entity.itemHandler.getStackInSlot(1).getItem() == ModItems.RAW_ZIRCON.get();
-
-        return hasRawGemInFirstSlot && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(
+        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager().getRecipeFor(
+            GemInfusingStationRecipe.Type.INSTANCE,
             inventory,
-            new ItemStack(ModItems.ZIRCON.get(), 1)
+            level
+        );
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(
+            inventory,
+            recipe.get().getResultItem()
         );
     }
 

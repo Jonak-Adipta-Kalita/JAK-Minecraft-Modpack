@@ -1,0 +1,11 @@
+{
+    "type": "jak:gem_infusing",
+    "ingredients": [
+        {
+            "item": "minecraft:raw_iron"
+        }
+    ],
+    "result": {
+        "item": "minecraft:iron"
+    }
+}
