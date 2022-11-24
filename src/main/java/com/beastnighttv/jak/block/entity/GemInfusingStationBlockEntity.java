@@ -3,7 +3,6 @@ package com.beastnighttv.jak.block.entity;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
-import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.recipe.GemInfusingStationRecipe;
 import com.beastnighttv.jak.screen.GemInfusingStationMenu;
 import net.minecraft.core.BlockPos;
