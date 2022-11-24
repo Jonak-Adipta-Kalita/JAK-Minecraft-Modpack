@@ -1,8 +1,11 @@
 package com.beastnighttv.jak.block.entity;
 
+import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
+import com.beastnighttv.jak.block.custom.GemInfusingStationBlock;
+import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.recipe.GemInfusingStationRecipe;
 import com.beastnighttv.jak.screen.GemInfusingStationMenu;
 import net.minecraft.core.BlockPos;
@@ -32,9 +35,54 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         protected void onContentsChanged(int slot) {
             setChanged();
         }
+
+        public boolean isItemValid(int slot, ItemStack stack) {
+            return switch (slot) {
+                case 0 -> stack.getItem() == ModItems.ZIRCON.get();
+                case 1 -> stack.getItem() == ModItems.RAW_ZIRCON.get();
+                case 2 -> false;
+                default -> super.isItemValid(slot, stack);
+            };
+        };
     };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
+        Direction.DOWN, 
+        LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+        Direction.NORTH,
+        LazyOptional.of(
+            () -> new WrappedHandler(
+                itemHandler, 
+                (index) -> index == 1,
+                (index, stack) -> itemHandler.isItemValid(1, stack)
+            )
+        ),
+        Direction.SOUTH,
+        LazyOptional.of(
+            () -> new WrappedHandler(
+                itemHandler,
+                (i) -> i == 2,
+                (i, s) -> false
+            )
+        ),
+        Direction.EAST,
+        LazyOptional.of(
+            () -> new WrappedHandler(
+                itemHandler,
+                (i) -> i == 1,
+                (index, stack) -> itemHandler.isItemValid(1, stack)
+            )
+        ),
+        Direction.WEST,
+        LazyOptional.of(
+            () -> new WrappedHandler(
+                itemHandler,
+                (index) -> index == 0 || index == 1,
+                (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack)
+            )
+        )
+    );
 
     protected final ContainerData data;
     private int progress = 0;
@@ -80,8 +128,25 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return lazyItemHandler.cast();
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (side == null) {
+                return lazyItemHandler.cast();
+            }
+
+            if (directionWrappedHandlerMap.containsKey(side)) {
+                Direction localDir = this.getBlockState().getValue(GemInfusingStationBlock.FACING);
+
+                if(side == Direction.UP || side == Direction.DOWN) {
+                    return directionWrappedHandlerMap.get(side).cast();
+                }
+
+                return switch (localDir) {
+                    default -> directionWrappedHandlerMap.get(side.getOpposite()).cast();
+                    case EAST -> directionWrappedHandlerMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionWrappedHandlerMap.get(side).cast();
+                    case WEST -> directionWrappedHandlerMap.get(side.getCounterClockWise()).cast();
+                };
+            }
         }
 
         return super.getCapability(cap, side);
