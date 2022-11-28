@@ -44,6 +44,10 @@ public class GemInfusingStationMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
+    public GemInfusingStationBlockEntity getBlockEntity() {
+        return this.blockEntity;
+    }
+
     @Override
     public boolean stillValid(Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.GEM_INFUSING_STATION.get());
