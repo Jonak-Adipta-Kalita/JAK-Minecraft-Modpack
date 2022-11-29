@@ -5,6 +5,10 @@
             "item": "minecraft:raw_iron"
         }
     ],
+    "fluid": {
+        "FluidName": "jak:soap_water_fluid",
+        "Amount": 300
+    },
     "result": {
         "item": "minecraft:iron_ingot"
     }

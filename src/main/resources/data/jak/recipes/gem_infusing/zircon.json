@@ -5,6 +5,10 @@
             "item": "jak:raw_zircon"
         }
     ],
+    "fluid": {
+        "FluidName": "jak:soap_water_fluid",
+        "Amount": 400
+    },
     "result": {
         "item": "jak:zircon"
     }

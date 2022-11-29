@@ -5,6 +5,10 @@
             "item": "minecraft:raw_copper"
         }
     ],
+    "fluid": {
+        "FluidName": "jak:soap_water_fluid",
+        "Amount": 250
+    },
     "result": {
         "item": "minecraft:copper_ingot"
     }
