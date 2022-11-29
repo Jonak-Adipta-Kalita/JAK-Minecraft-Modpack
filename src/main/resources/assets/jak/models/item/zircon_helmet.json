@@ -1,6 +1,6 @@
 {
-	"parent": "minecraft:item/generated",
-	"textures": {
-		"layer0": "jak:item/zircon_helmet"
-	}
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "jak:item/zircon_helmet"
+    }
 }

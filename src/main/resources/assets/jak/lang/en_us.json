@@ -38,5 +38,5 @@
     "jak.tooltip.liquid.amount.with.capacity": "%s / %s mB",
     "jak.tooltip.liquid.amount": "%s mB",
 
-	"fluid_type.jak.soap_water_fluid": "Soap Water"
+    "fluid_type.jak.soap_water_fluid": "Soap Water"
 }

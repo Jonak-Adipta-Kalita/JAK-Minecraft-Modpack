@@ -8,13 +8,12 @@
         "H": {
             "item": "minecraft:hopper"
         },
-		"R": {
-			"item": "minecraft:iron_rod"
-		}
+        "R": {
+            "item": "minecraft:iron_rod"
+        }
     },
     "result": {
         "item": "jak:gem_infusing_station",
         "count": 1
     }
 }
-
