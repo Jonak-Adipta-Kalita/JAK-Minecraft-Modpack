@@ -7,7 +7,7 @@
         },
         "P": {
             "item": "minecraft:glass_bottle"
-        },
+        }
     },
     "result": {
         "item": "minecraft:jumpy_block",
