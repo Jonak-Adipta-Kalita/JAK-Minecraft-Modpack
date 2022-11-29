@@ -40,7 +40,7 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class GemInfusingStationBlockEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(3) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(4) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -51,6 +51,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
                 case 0 -> stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent();
                 case 1 -> true;
                 case 2 -> false;
+                case 3 -> true;
                 default -> super.isItemValid(slot, stack);
             };
         };
@@ -261,7 +262,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
             return;
         }
 
-        if (hasGemInFirstSlot(pEntity)) {
+        if (hasEnergyGemInFourthSlot(pEntity)) {
             pEntity.ENERGY_STORAGE.receiveEnergy(64, false);
         }
 
@@ -318,8 +319,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         return pEntity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ * pEntity.maxProgress;
     }
 
-    private static boolean hasGemInFirstSlot(GemInfusingStationBlockEntity pEntity) {
-        return pEntity.itemHandler.getStackInSlot(0).getItem() == ModItems.ZIRCON.get();
+    private static boolean hasEnergyGemInFourthSlot(GemInfusingStationBlockEntity pEntity) {
+        return pEntity.itemHandler.getStackInSlot(3).getItem() == ModItems.ZIRCON.get();
     }
 
 

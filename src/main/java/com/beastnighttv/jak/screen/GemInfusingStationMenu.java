@@ -29,7 +29,7 @@ public class GemInfusingStationMenu extends AbstractContainerMenu {
 
     public GemInfusingStationMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.GEM_INFUSING_STATION_MENU.get(), id);
-        checkContainerSize(inv, 3);
+        checkContainerSize(inv, 4);
         blockEntity = (GemInfusingStationBlockEntity) entity;
         this.level = inv.player.level;
         this.data = data;
@@ -42,6 +42,7 @@ public class GemInfusingStationMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(handler, 0, 12, 15));
             this.addSlot(new SlotItemHandler(handler, 1, 86, 15));
             this.addSlot(new SlotItemHandler(handler, 2, 86, 60));
+            this.addSlot(new SlotItemHandler(handler, 3, 122, 15));
         });
 
         addDataSlots(data);
@@ -97,7 +98,7 @@ public class GemInfusingStationMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
