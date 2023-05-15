@@ -168,6 +168,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+        ModMessages.sendToClients(new EnergySyncS2CPacket(this.ENERGY_STORAGE.getEnergyStored(), getBlockPos()));
+        ModMessages.sendToClients(new FluidSyncS2CPacket(this.getFluidStack(), worldPosition));
         return new GemInfusingStationMenu(id, inventory, this, this.data);
     }
 	
@@ -266,7 +268,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
             pEntity.ENERGY_STORAGE.receiveEnergy(64, false);
         }
 
-        if (hasRecipe(pEntity) && hasEnoughEnergy(pEntity) && hasEnoughFluid(pEntity)) {
+        if (hasRecipe(pEntity) && hasEnoughEnergy(pEntity)) {
             pEntity.progress++;
             extractEnergy(pEntity);
             setChanged(level, pos, state);
@@ -282,10 +284,6 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         if (hasFluidItemInSourceSlot(pEntity)) {
             transferItemFluidToFluidTank(pEntity);
         }
-    }
-
-    private static boolean hasEnoughFluid(GemInfusingStationBlockEntity pEntity) {
-        return pEntity.FLUID_TANK.getFluidAmount() >= 500;
     }
 
     private static void transferItemFluidToFluidTank(GemInfusingStationBlockEntity pEntity) {
@@ -371,10 +369,14 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
             level
         );
 
-        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(
-            inventory,
-            recipe.get().getResultItem()
-        );
+        return recipe.isPresent()
+            && canInsertAmountIntoOutputSlot(inventory)
+            && canInsertItemIntoOutputSlot(
+                inventory,
+                recipe.get().getResultItem()
+            )
+            && recipe.get().getFluid().equals(entity.FLUID_TANK.getFluid())
+            && entity.FLUID_TANK.getFluidAmount() >= recipe.get().getFluid().getAmount();
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {
