@@ -33,11 +33,12 @@ public class FluidSyncS2CPacket {
         Minecraft minecraft = Minecraft.getInstance();
 
         context.enqueueWork(() -> {
-            if(minecraft.level.getBlockEntity(pos) instanceof GemInfusingStationBlockEntity blockEntity) {
+            if (minecraft.level
+                    .getBlockEntity(pos) instanceof GemInfusingStationBlockEntity blockEntity) {
                 blockEntity.setFluid(this.fluidStack);
 
-                if(minecraft.player.containerMenu instanceof GemInfusingStationMenu menu &&
-                    menu.getBlockEntity().getBlockPos().equals(pos)) {
+                if (minecraft.player.containerMenu instanceof GemInfusingStationMenu menu
+                        && menu.getBlockEntity().getBlockPos().equals(pos)) {
                     menu.setFluid(this.fluidStack);
                 }
             }

@@ -32,11 +32,12 @@ public class EnergySyncS2CPacket {
         Minecraft minecraft = Minecraft.getInstance();
 
         context.enqueueWork(() -> {
-            if (minecraft.level.getBlockEntity(pos) instanceof GemInfusingStationBlockEntity blockEntity) {
+            if (minecraft.level
+                    .getBlockEntity(pos) instanceof GemInfusingStationBlockEntity blockEntity) {
                 blockEntity.setEnergyLevel(energy);
 
-                if(minecraft.player.containerMenu instanceof GemInfusingStationMenu menu &&
-                    menu.getBlockEntity().getBlockPos().equals(pos)) {
+                if (minecraft.player.containerMenu instanceof GemInfusingStationMenu menu
+                        && menu.getBlockEntity().getBlockPos().equals(pos)) {
                     blockEntity.setEnergyLevel(energy);
                 }
             }

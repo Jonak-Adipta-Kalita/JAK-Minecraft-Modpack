@@ -10,6 +10,7 @@ import com.beastnighttv.jak.item.ModItems;
 import com.beastnighttv.jak.networking.ModMessages;
 import com.beastnighttv.jak.networking.packet.EnergySyncS2CPacket;
 import com.beastnighttv.jak.networking.packet.FluidSyncS2CPacket;
+import com.beastnighttv.jak.networking.packet.ItemStackSyncS2CPacket;
 import com.beastnighttv.jak.recipe.GemInfusingStationRecipe;
 import com.beastnighttv.jak.screen.GemInfusingStationMenu;
 import com.beastnighttv.jak.util.ModEnergyStorage;
@@ -44,6 +45,9 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            if (!level.isClientSide()) {
+                ModMessages.sendToClients(new ItemStackSyncS2CPacket(this, worldPosition));
+            }
         }
 
         public boolean isItemValid(int slot, ItemStack stack) {
@@ -57,7 +61,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         };
     };
 
-	private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(60000, 256) {
+    private final ModEnergyStorage ENERGY_STORAGE = new ModEnergyStorage(60000, 256) {
         @Override
         public void onEnergyChanged() {
             setChanged();
@@ -70,17 +74,18 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         @Override
         protected void onContentsChanged() {
             setChanged();
-            if(!level.isClientSide()) {
+            if (!level.isClientSide()) {
                 ModMessages.sendToClients(new FluidSyncS2CPacket(this.fluid, worldPosition));
             }
         }
 
         @Override
         public boolean isFluidValid(FluidStack stack) {
-            return stack.getFluid() == Fluids.WATER || stack.getFluid() == ModFluids.SOURCE_SOAP_WATER.get();
+            return stack.getFluid() == Fluids.WATER
+                    || stack.getFluid() == ModFluids.SOURCE_SOAP_WATER.get();
         }
     };
-    
+
     public void setFluid(FluidStack stack) {
         this.FLUID_TANK.setFluid(stack);
     }
@@ -91,41 +96,21 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private final Map<Direction, LazyOptional<WrappedHandler>> directionWrappedHandlerMap = Map.of(
-        Direction.DOWN, 
-        LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
-        Direction.NORTH,
-        LazyOptional.of(
-            () -> new WrappedHandler(
-                itemHandler, 
-                (index) -> index == 1,
-                (index, stack) -> itemHandler.isItemValid(1, stack)
-            )
-        ),
-        Direction.SOUTH,
-        LazyOptional.of(
-            () -> new WrappedHandler(
-                itemHandler,
-                (i) -> i == 2,
-                (i, s) -> false
-            )
-        ),
-        Direction.EAST,
-        LazyOptional.of(
-            () -> new WrappedHandler(
-                itemHandler,
-                (i) -> i == 1,
-                (index, stack) -> itemHandler.isItemValid(1, stack)
-            )
-        ),
-        Direction.WEST,
-        LazyOptional.of(
-            () -> new WrappedHandler(
-                itemHandler,
-                (index) -> index == 0 || index == 1,
-                (index, stack) -> itemHandler.isItemValid(0, stack) || itemHandler.isItemValid(1, stack)
-            )
-        )
-    );
+            Direction.DOWN,
+            LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+            Direction.NORTH,
+            LazyOptional.of(() -> new WrappedHandler(itemHandler, (index) -> index == 1,
+                    (index, stack) -> itemHandler.isItemValid(1, stack))),
+            Direction.SOUTH,
+            LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 2, (i, s) -> false)),
+            Direction.EAST,
+            LazyOptional.of(() -> new WrappedHandler(itemHandler, (i) -> i == 1,
+                    (index, stack) -> itemHandler.isItemValid(1, stack))),
+            Direction.WEST,
+            LazyOptional
+                    .of(() -> new WrappedHandler(itemHandler, (index) -> index == 0 || index == 1,
+                            (index, stack) -> itemHandler.isItemValid(0, stack)
+                                    || itemHandler.isItemValid(1, stack))));
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
 
@@ -168,12 +153,13 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-        ModMessages.sendToClients(new EnergySyncS2CPacket(this.ENERGY_STORAGE.getEnergyStored(), getBlockPos()));
+        ModMessages.sendToClients(
+                new EnergySyncS2CPacket(this.ENERGY_STORAGE.getEnergyStored(), getBlockPos()));
         ModMessages.sendToClients(new FluidSyncS2CPacket(this.getFluidStack(), worldPosition));
         return new GemInfusingStationMenu(id, inventory, this, this.data);
     }
-	
-	public IEnergyStorage getEnergyStorage() {
+
+    public IEnergyStorage getEnergyStorage() {
         return ENERGY_STORAGE;
     }
 
@@ -182,7 +168,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap,
+            @Nullable Direction side) {
         if (cap == ForgeCapabilities.ENERGY) {
             return lazyEnergyHandler.cast();
         }
@@ -199,7 +186,7 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
             if (directionWrappedHandlerMap.containsKey(side)) {
                 Direction localDir = this.getBlockState().getValue(GemInfusingStationBlock.FACING);
 
-                if(side == Direction.UP || side == Direction.DOWN) {
+                if (side == Direction.UP || side == Direction.DOWN) {
                     return directionWrappedHandlerMap.get(side).cast();
                 }
 
@@ -259,7 +246,8 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, GemInfusingStationBlockEntity pEntity) {
+    public static void tick(Level level, BlockPos pos, BlockState state,
+            GemInfusingStationBlockEntity pEntity) {
         if (level.isClientSide()) {
             return;
         }
@@ -287,18 +275,21 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     }
 
     private static void transferItemFluidToFluidTank(GemInfusingStationBlockEntity pEntity) {
-        pEntity.itemHandler.getStackInSlot(0).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).ifPresent(handler -> {
-            int drainAmount = Math.min(pEntity.FLUID_TANK.getSpace(), 1000);
-            FluidStack stack = handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
-            
-            if (pEntity.FLUID_TANK.isFluidValid(stack)) {
-                stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
-                fillTankWithFluid(pEntity, stack, handler.getContainer());
-            }
-        });
+        pEntity.itemHandler.getStackInSlot(0).getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM)
+                .ifPresent(handler -> {
+                    int drainAmount = Math.min(pEntity.FLUID_TANK.getSpace(), 1000);
+                    FluidStack stack =
+                            handler.drain(drainAmount, IFluidHandler.FluidAction.SIMULATE);
+
+                    if (pEntity.FLUID_TANK.isFluidValid(stack)) {
+                        stack = handler.drain(drainAmount, IFluidHandler.FluidAction.EXECUTE);
+                        fillTankWithFluid(pEntity, stack, handler.getContainer());
+                    }
+                });
     }
 
-    private static void fillTankWithFluid(GemInfusingStationBlockEntity pEntity, FluidStack stack, ItemStack container) {
+    private static void fillTankWithFluid(GemInfusingStationBlockEntity pEntity, FluidStack stack,
+            ItemStack container) {
         pEntity.FLUID_TANK.fill(stack, IFluidHandler.FluidAction.EXECUTE);
 
         pEntity.itemHandler.extractItem(0, 1, false);
@@ -334,22 +325,16 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
             inventory.setItem(i, pEntity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager().getRecipeFor(
-            GemInfusingStationRecipe.Type.INSTANCE,
-            inventory,
-            level
-        );
+        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(GemInfusingStationRecipe.Type.INSTANCE, inventory, level);
 
-        if(hasRecipe(pEntity)) {
-            pEntity.FLUID_TANK.drain(recipe.get().getFluid().getAmount(), IFluidHandler.FluidAction.EXECUTE);
+        if (hasRecipe(pEntity)) {
+            pEntity.FLUID_TANK.drain(recipe.get().getFluid().getAmount(),
+                    IFluidHandler.FluidAction.EXECUTE);
             pEntity.itemHandler.extractItem(1, 1, false);
-            pEntity.itemHandler.setStackInSlot(
-                2,
-                new ItemStack(
-                    recipe.get().getResultItem().getItem(),
-                    pEntity.itemHandler.getStackInSlot(2).getCount() + 1
-                )
-            );
+            pEntity.itemHandler.setStackInSlot(2,
+                    new ItemStack(recipe.get().getResultItem().getItem(),
+                            pEntity.itemHandler.getStackInSlot(2).getCount() + 1));
 
             pEntity.resetProgress();
         }
@@ -358,25 +343,18 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
     private static boolean hasRecipe(GemInfusingStationBlockEntity entity) {
         Level level = entity.level;
         SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        
+
         for (int i = 0; i < entity.itemHandler.getSlots(); i++) {
             inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
         }
 
-        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager().getRecipeFor(
-            GemInfusingStationRecipe.Type.INSTANCE,
-            inventory,
-            level
-        );
+        Optional<GemInfusingStationRecipe> recipe = level.getRecipeManager()
+                .getRecipeFor(GemInfusingStationRecipe.Type.INSTANCE, inventory, level);
 
-        return recipe.isPresent()
-            && canInsertAmountIntoOutputSlot(inventory)
-            && canInsertItemIntoOutputSlot(
-                inventory,
-                recipe.get().getResultItem()
-            )
-            && recipe.get().getFluid().equals(entity.FLUID_TANK.getFluid())
-            && entity.FLUID_TANK.getFluidAmount() >= recipe.get().getFluid().getAmount();
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(inventory)
+                && canInsertItemIntoOutputSlot(inventory, recipe.get().getResultItem())
+                && recipe.get().getFluid().equals(entity.FLUID_TANK.getFluid())
+                && entity.FLUID_TANK.getFluidAmount() >= recipe.get().getFluid().getAmount();
     }
 
     private static boolean canInsertItemIntoOutputSlot(SimpleContainer inventory, ItemStack stack) {
@@ -385,5 +363,23 @@ public class GemInfusingStationBlockEntity extends BlockEntity implements MenuPr
 
     private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
         return inventory.getItem(2).getMaxStackSize() > inventory.getItem(2).getCount();
+    }
+
+    public ItemStack getRenderStack() {
+        ItemStack stack;
+
+        if (!itemHandler.getStackInSlot(2).isEmpty()) {
+            stack = itemHandler.getStackInSlot(2);
+        } else {
+            stack = itemHandler.getStackInSlot(1);
+        }
+
+        return stack;
+    }
+
+    public void setHandler(ItemStackHandler itemStackHandler) {
+        for (int i = 0; i < itemStackHandler.getSlots(); i++) {
+            itemHandler.setStackInSlot(i, itemStackHandler.getStackInSlot(i));
+        }
     }
 }
